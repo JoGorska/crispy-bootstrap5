@@ -234,6 +234,19 @@ class TestBootstrapLayoutObjects:
         html = render_crispy_form(test_form)
         assert html.count('form-check-inline"') == 2
 
+    def test_inline_radios_with_errors(self):
+        test_form = CheckboxesSampleForm()
+        test_form.inline_radios.required = True
+        test_form.inline_radios.initial = None
+        test_form.helper = FormHelper()
+        test_form.helper.layout = Layout(InlineRadios("inline_radios"))
+        html = render_crispy_form(test_form)
+        print(html)
+        assert 2==3
+        # todo assert if error is displayed
+        # error should be field is requred
+        # compare snapshots of form with errors
+
     @override_settings(CRISPY_CLASS_CONVERTERS=CONVERTERS)
     def test_accordion_and_accordiongroup(self):
         random.seed(0)
